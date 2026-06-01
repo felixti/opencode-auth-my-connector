@@ -1,0 +1,29 @@
+{
+  "skill_name": "opencode-auth-plugin",
+  "evals": [
+    {
+      "id": 0,
+      "name": "entra-azure-openai-ssh",
+      "prompt": "I run opencode on a remote dev box over SSH and want it to authenticate against our Azure OpenAI deployment using our company's Microsoft Entra ID login instead of me pasting an API key. Build me an opencode plugin that adds an Entra ID device-code login for a custom provider, plus the opencode.json I need. Our tenant id is 11111111-1111-1111-1111-111111111111, the app registration (client) id is 22222222-2222-2222-2222-222222222222, and the endpoint is https://contoso-oai.openai.azure.com/openai/v1.",
+      "expected_output": "A TypeScript opencode plugin exporting a Plugin that returns an `auth` hook (provider id, an oauth method using method:\"auto\", and a loader). authorize() POSTs the Entra v2.0 devicecode endpoint, shows verification_uri + user_code, then polls the token endpoint with grant_type=urn:ietf:params:oauth:grant-type:device_code. Scope includes offline_access. expires stored as absolute epoch ms. loader injects an Authorization: Bearer header via a custom fetch and refreshes via grant_type=refresh_token + client.auth.set. An opencode.json provider entry whose key matches auth.provider, using @ai-sdk/openai-compatible and the given baseURL. The provided tenant/client id/endpoint are used (not left as placeholders).",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 1,
+      "name": "okta-internal-gateway-docker",
+      "prompt": "We have an internal LLM gateway behind Okta SSO. opencode runs inside a Docker container with no browser available. I want a custom provider in opencode that logs in via OAuth 2.0 device code against Okta and then calls our gateway at https://llm.internal.acme.com/v1. Walk me through it and write the plugin.",
+      "expected_output": "A working device-code auth plugin generalized to Okta (Okta device authorization + /token endpoints, offline_access scope for refresh). Same opencode auth-hook structure: auth.provider, methods with type oauth + method:\"auto\", authorize() that polls Okta's token endpoint, and a loader with a custom fetch that sets the bearer header, refreshes when expired, and persists with client.auth.set. opencode.json provider entry keyed to match auth.provider with baseURL https://llm.internal.acme.com/v1. Notes that device-code is correct because Docker has no browser/loopback.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "name": "structure-and-refresh",
+      "prompt": "How do I make a custom provider show up in `opencode auth login` with our own OAuth login? I need the plugin to refresh the access token automatically when it expires and store it so I don't have to log in every time.",
+      "expected_output": "Explanation + code showing the auth hook is what surfaces a provider in opencode auth login / /connect: provider id must match opencode.json, methods define the login options, loader returns the SDK config. Correctly shows automatic refresh: store expires as absolute epoch ms, refresh inside loader's fetch when expires < Date.now() using grant_type=refresh_token, and persist with client.auth.set so the user doesn't re-login. Mentions credentials live in auth.json.",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}

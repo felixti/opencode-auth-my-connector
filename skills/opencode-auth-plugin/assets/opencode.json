@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "entra": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Entra ID (Azure OpenAI)",
+      "options": {
+        "baseURL": "https://YOUR-RESOURCE.openai.azure.com/openai/v1"
+      },
+      "models": {
+        "gpt-4o": {
+          "name": "GPT-4o (Entra)"
+        }
+      }
+    }
+  }
+}

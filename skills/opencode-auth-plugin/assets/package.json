@@ -1,0 +1,7 @@
+{
+  "//": "Place this at .opencode/package.json (project) or ~/.config/opencode/package.json (global). opencode runs `bun install` here at startup so your plugin can import these. @opencode-ai/plugin gives you the Plugin type; @ai-sdk/openai-compatible is the provider package referenced by provider.<id>.npm in opencode.json.",
+  "dependencies": {
+    "@opencode-ai/plugin": "latest",
+    "@ai-sdk/openai-compatible": "latest"
+  }
+}
