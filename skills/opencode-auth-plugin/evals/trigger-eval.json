@@ -1,0 +1,23 @@
+[
+  { "query": "i've got opencode running on a headless ubuntu box i ssh into. i want to use our azure openai models but log in with my work microsoft account instead of pasting an api key. can you write the plugin that makes `opencode auth login` show an Entra ID login?", "should_trigger": true },
+  { "query": "We run an internal LLM gateway behind Okta. I need opencode (it's in a docker container, no browser) to do an OAuth device-code login against Okta and then call our gateway at https://llm.corp.acme.io/v1. Write me the plugin + opencode.json please.", "should_trigger": true },
+  { "query": "how do I add a custom auth method to the opencode /connect picker for our company SSO? it should refresh the access token automatically so people don't have to keep signing in", "should_trigger": true },
+  { "query": "opencode plugin that does the oauth2 device authorization grant against keycloak so my team can log into our self-hosted model endpoint", "should_trigger": true },
+  { "query": "I want opencode to authenticate against Google as an OIDC provider using a device code flow, and store the tokens so I'm not re-authenticating every session", "should_trigger": true },
+  { "query": "make a provider plugin for opencode where the loader injects a bearer token obtained from an oauth flow, and refreshes it via client.auth.set when it's expired", "should_trigger": true },
+  { "query": "our devs use opencode on remote dev boxes and we don't want them pasting API keys. we want them to sign in with Entra ID (Azure AD). what's the plugin code for the auth hook with a device-code login?", "should_trigger": true },
+  { "query": "write an opencode auth plugin: it should hit the microsoft devicecode endpoint, poll for the token, and wire up an azure-openai compatible provider that uses the access token", "should_trigger": true },
+  { "query": "I want `opencode auth login` to offer 'Login with Auth0' for our internal models. has to be a browserless flow because opencode runs in docker. how do I build that?", "should_trigger": true },
+  { "query": "can you help me build an opencode plugin so it logs into our Ping Identity SSO using the oauth device code grant and uses the access token for our /v1/chat/completions gateway?", "should_trigger": true },
+
+  { "query": "I ran `opencode auth login` and want to use the OpenCode Zen models — how do I sign in to my opencode account and pick a model?", "should_trigger": false },
+  { "query": "set up a custom OpenAI-compatible provider in opencode for our endpoint — we just have a static API key, I just need help with the opencode.json config", "should_trigger": false },
+  { "query": "I'm building a Next.js web app and need to implement Microsoft Entra ID device-code OAuth login for my end users in Node. how do I poll the token endpoint and store the session?", "should_trigger": false },
+  { "query": "write an opencode plugin that pops a desktop notification (osascript) when a session finishes or errors", "should_trigger": false },
+  { "query": "my Azure OpenAI calls in opencode are returning 401. help me debug the api key and baseURL in my opencode config", "should_trigger": false },
+  { "query": "how do I turn on GitHub Copilot in opencode and authenticate it? I have a Copilot subscription", "should_trigger": false },
+  { "query": "I want to add an MCP server to opencode that needs an OAuth bearer token in its headers — how do I configure that in opencode.json?", "should_trigger": false },
+  { "query": "implement the OAuth 2.0 device authorization grant (RFC 8628) in our Python FastAPI backend so our CLI tool can authenticate", "should_trigger": false },
+  { "query": "how do I refresh an expired Azure AD access token using the refresh token in C# with MSAL?", "should_trigger": false },
+  { "query": "set up Okta SSO login for our internal Grafana dashboard via SAML", "should_trigger": false }
+]
