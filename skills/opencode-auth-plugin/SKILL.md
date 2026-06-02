@@ -1,15 +1,22 @@
 ---
 name: opencode-auth-plugin
 description: >-
-  Build an opencode auth-login plugin that authenticates a custom provider using the OAuth
-  2.0 device-code flow (RFC 8628), with Microsoft Entra ID (Azure AD) as the worked example.
-  Use this whenever the user wants to add login/authentication to opencode for a custom,
-  internal, or enterprise model provider — e.g. creating an `opencode auth login` / `/connect`
-  method, writing a plugin that uses the `auth` hook, handling device-code or headless/SSH/VPS/
-  Docker OAuth, wiring access-token refresh, or connecting opencode to Azure OpenAI, Entra ID,
-  or any OIDC/OAuth provider. Trigger this even when the user only says things like "add Entra
-  ID login to opencode", "opencode custom provider OAuth", "authenticate opencode with our SSO",
-  "opencode device-code auth plugin", or "let opencode log in to our internal model gateway".
+  Build (write/code) an opencode plugin that adds an OAuth login for a custom or self-hosted
+  model provider — primarily the OAuth 2.0 device-code grant (RFC 8628) for headless setups
+  (SSH, VPS, Docker, CI) — with Microsoft Entra ID (Azure AD) as the worked example. Use this when
+  the user wants to create their own login in `opencode auth login` / the `/connect` picker by
+  implementing the plugin `auth` hook (methods + authorize + a loader): running a device-code
+  or browser OAuth flow, injecting a bearer token, refreshing the access token (e.g. via
+  client.auth.set), or wiring opencode up to Azure OpenAI, Entra ID, Okta, Keycloak, Auth0,
+  Google, Ping, or any OIDC/OAuth provider or internal model gateway. Trigger this even when
+  phrased loosely, e.g. "add Entra ID login to opencode", "opencode custom provider OAuth",
+  "authenticate opencode with our SSO", "opencode device-code auth plugin", or "let opencode
+  log in to our internal model gateway". Do NOT use this for: signing into opencode's own
+  built-in providers (OpenCode Zen, GitHub Copilot, etc.) via `opencode auth login`; configuring
+  a custom provider that only needs a static API key in opencode.json; debugging an existing
+  API key or baseURL (e.g. a 401); opencode MCP-server OAuth config; other non-auth opencode
+  plugins (notifications, custom tools, formatters); or implementing OAuth / device-code /
+  token-refresh in a general app or backend that is not an opencode provider plugin.
 ---
 
 # Build an opencode auth-login plugin (device-code OAuth 2.0)
